@@ -1,0 +1,9 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: python evaluate_snippets.py
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
