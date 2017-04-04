@@ -52,7 +52,7 @@ def evaluate():
       200:
         description: Evaluated step count
     """
-    with time_limit(10):
+    with time_limit(5):
         # Run snippet code against maze
         maze = Maze(request.json.get('maze'))
 
