@@ -56,13 +56,27 @@ def evaluate():
         # Run snippet code against maze
         maze = Maze(request.json.get('maze'))
 
+        steps = 0
+
         try:
             exec request.json.get('snippet')
         except Exception as e:
             print(e.message)  # Catch all exceptions
+            json.dumps({'steps': 0}), 200
 
         # Get step count
-        steps = len(maze.get_history()) - 1 if maze.is_maze_solved() else 0
+        prevPos = {}
+
+        for pos in maze.get_history():
+            if len(prevPos) == 0:
+                prevPos = pos
+
+            if abs(prevPos.x - pos.x) > 1 or abs(prevPos.y - pos.y) > 1:
+                steps = -1
+
+        if steps == 0 :
+            steps = len(maze.get_history()) - 1 if maze.is_maze_solved() else 0
+
         return json.dumps({'steps': steps}), 200
 
 
