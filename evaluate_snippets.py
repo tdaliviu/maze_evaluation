@@ -71,7 +71,7 @@ def evaluate():
             if len(prevPos) == 0:
                 prevPos = pos
 
-            if abs(prevPos.x - pos.x) > 1 or abs(prevPos.y - pos.y) > 1:
+            if abs(prevPos['x'] - pos['x']) > 1 or abs(prevPos['y'] - pos['y']) > 1:
                 steps = -1
 
         if steps == 0 :
